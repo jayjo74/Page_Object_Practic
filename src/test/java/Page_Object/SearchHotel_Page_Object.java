@@ -3,7 +3,9 @@ package Page_Object;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.Reporter;
 
@@ -13,6 +15,7 @@ import org.testng.Reporter;
 public class SearchHotel_Page_Object extends General_Functions{
 
     WebDriver driver;
+    WebDriverWait wait;
 
     By pageCheck_Hello = By.name("username_show");
     By locationBox = By.name("location");
@@ -25,7 +28,7 @@ public class SearchHotel_Page_Object extends General_Functions{
     By childRoomCBox = By.name("child_room");
     By searchButton = By.name("Submit");
     By resetButton = By.name("Reset");
-
+    By checkInSpan = By.id("checkin_span");
 
     //constroctor
     public SearchHotel_Page_Object(WebDriver driver){
@@ -57,16 +60,15 @@ public class SearchHotel_Page_Object extends General_Functions{
 
     }
 
-    public void selectRoomType(String room) {
-        select_DropDown_ByVisibleText(driver.findElement(numRoomsBox),room);
-        String acturalValue = get_SelectedOption(driver.findElement(numRoomsBox));
+    public void selectRoomType(String roomType) {
+        select_DropDown_ByVisibleText(driver.findElement(roomTypeBox),roomType);
+        String acturalValue = get_SelectedOption(driver.findElement(roomTypeBox));
 
-        if(room.equals(acturalValue)){
-            Reporter.log("Room : "+room,true);
+        if(roomType.equals(acturalValue)){
+            Reporter.log("Room type : "+roomType,true);
         }else {
-            Reporter.log("Failed input the Room : "+room);
+            Reporter.log("Failed input the Room type : "+roomType);
         }
-
     }
 
 
@@ -75,11 +77,51 @@ public class SearchHotel_Page_Object extends General_Functions{
         String acturalValue = get_SelectedOption(driver.findElement(numRoomsBox));
 
         if(room.equals(acturalValue)){
-            Reporter.log("Room : "+room,true);
+            Reporter.log("Number of room : "+room,true);
         }else {
-            Reporter.log("Failed input the Room : "+room);
+            Reporter.log("Failed input the number of room : "+room);
         }
 
+    }
+
+    public void setCheckInDate(String checkInDate){
+        driver.findElement(checkInBox).clear();
+        driver.findElement(checkInBox).sendKeys(checkInDate);
+        Reporter.log("Check In date : "+checkInDate,true);
+    }
+
+    public void setCheckOutDate(String checkOutDate){
+        driver.findElement(checkOutBox).clear();
+        driver.findElement(checkOutBox).sendKeys(checkOutDate);
+        Reporter.log("Check Out date : "+checkOutDate,true);
+    }
+
+
+    public void setAdultRoomBox(String adultRoom){
+        select_DropDown_ByVisibleText(driver.findElement(adultRoomCBox),adultRoom);
+        String acturalValue = get_SelectedOption(driver.findElement(adultRoomCBox));
+
+        if(acturalValue.equals(adultRoom)){
+            Reporter.log("Adult per room : "+adultRoom,true);
+        } else {
+            Reporter.log("Failed input the Adult per room : "+adultRoom);
+        }
+    }
+
+    public void clickSerarchButton(){
+        driver.findElement(searchButton).click();
+        Reporter.log("Clicked Search button");
+    }
+
+    public void verify_checkInSpan(){
+        wait = new WebDriverWait(driver,10);
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(checkInSpan));
+            String spanMessage = driver.findElement(checkInSpan).getText();
+            Reporter.log("Verify Message : "+spanMessage,true);
+        } catch (Exception e){
+            Reporter.log("Failed to verify message.");
+        }
     }
 
 }
