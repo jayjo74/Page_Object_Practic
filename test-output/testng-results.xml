@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="1" total="2" passed="1">
+  <reporter-output>
+    <line>
+      <![CDATA[Browser Opened with http://adactin.com/HotelAppBuild2/]]>
+    </line>
+    <line>
+      <![CDATA[Log in user : jayzzang]]>
+    </line>
+    <line>
+      <![CDATA[Log in password : seattle123]]>
+    </line>
+    <line>
+      <![CDATA[Clicked Log in button.]]>
+    </line>
+    <line>
+      <![CDATA[Successfuly logged in]]>
+    </line>
+  </reporter-output>
+  <suite name="Default Suite" duration-ms="11174" started-at="2017-02-16T06:07:28Z" finished-at="2017-02-16T06:07:39Z">
+    <groups>
+    </groups>
+    <test name="Page_Object_Practic" duration-ms="11174" started-at="2017-02-16T06:07:28Z" finished-at="2017-02-16T06:07:39Z">
+      <class name="Test_Cases.HottelApp">
+        <test-method status="PASS" signature="setUp()[pri:0, instance:Test_Cases.HottelApp@66d33a]" name="setUp" is-config="true" duration-ms="8950" started-at="2017-02-15T22:07:28Z" finished-at="2017-02-15T22:07:37Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Browser Opened with http://adactin.com/HotelAppBuild2/]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method status="PASS" signature="TC_101()[pri:0, instance:Test_Cases.HottelApp@66d33a]" name="TC_101" duration-ms="2187" started-at="2017-02-15T22:07:37Z" finished-at="2017-02-15T22:07:39Z">
+          <reporter-output>
+            <line>
+              <![CDATA[Log in user : jayzzang]]>
+            </line>
+            <line>
+              <![CDATA[Log in password : seattle123]]>
+            </line>
+            <line>
+              <![CDATA[Clicked Log in button.]]>
+            </line>
+            <line>
+              <![CDATA[Successfuly logged in]]>
+            </line>
+          </reporter-output>
+        </test-method> <!-- TC_101 -->
+      </class> <!-- Test_Cases.HottelApp -->
+    </test> <!-- Page_Object_Practic -->
+  </suite> <!-- Default Suite -->
+</testng-results>
