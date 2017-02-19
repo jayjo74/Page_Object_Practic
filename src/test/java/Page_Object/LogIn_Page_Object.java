@@ -49,7 +49,7 @@ public class LogIn_Page_Object {
         wait = new WebDriverWait(driver,20);
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchLocation));
         Reporter.log("Successfuly logged in",true);
-           }
+    }
 
 
 

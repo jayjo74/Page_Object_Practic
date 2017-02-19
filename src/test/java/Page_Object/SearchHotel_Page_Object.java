@@ -25,10 +25,11 @@ public class SearchHotel_Page_Object extends General_Functions{
     By checkInBox = By.name("datepick_in");
     By checkOutBox = By.name("datepick_out");
     By adultRoomCBox = By.name("adult_room");
-    By childRoomCBox = By.name("child_room");
+    By childRoomBox = By.name("child_room");
     By searchButton = By.name("Submit");
     By resetButton = By.name("Reset");
     By checkInSpan = By.id("checkin_span");
+    By continueBtuoon = By.name("continue");
 
     //constroctor
     public SearchHotel_Page_Object(WebDriver driver){
@@ -55,7 +56,7 @@ public class SearchHotel_Page_Object extends General_Functions{
         if(hotel.equals(acturalValue)){
             Reporter.log("Hotel : "+hotel,true);
         }else {
-            Reporter.log("Failed input the Hotel : "+hotel);
+            Reporter.log("Failed input the Hotel : "+hotel,true);
         }
 
     }
@@ -67,7 +68,7 @@ public class SearchHotel_Page_Object extends General_Functions{
         if(roomType.equals(acturalValue)){
             Reporter.log("Room type : "+roomType,true);
         }else {
-            Reporter.log("Failed input the Room type : "+roomType);
+            Reporter.log("Failed input the Room type : "+roomType,true);
         }
     }
 
@@ -79,7 +80,19 @@ public class SearchHotel_Page_Object extends General_Functions{
         if(room.equals(acturalValue)){
             Reporter.log("Number of room : "+room,true);
         }else {
-            Reporter.log("Failed input the number of room : "+room);
+            Reporter.log("Failed input the number of room : "+room,true);
+        }
+
+    }
+
+    public void selectNumchild(String numChilds) {
+        select_DropDown_ByVisibleText(driver.findElement(childRoomBox),numChilds);
+        String acturalValue = get_SelectedOption(driver.findElement(childRoomBox));
+
+        if(numChilds.equals(acturalValue)){
+            Reporter.log("Number of child : "+numChilds,true);
+        }else {
+            Reporter.log("Failed input the number of child : "+numChilds,true);
         }
 
     }
@@ -104,13 +117,13 @@ public class SearchHotel_Page_Object extends General_Functions{
         if(acturalValue.equals(adultRoom)){
             Reporter.log("Adult per room : "+adultRoom,true);
         } else {
-            Reporter.log("Failed input the Adult per room : "+adultRoom);
+            Reporter.log("Failed input the Adult per room : "+adultRoom,true);
         }
     }
 
     public void clickSerarchButton(){
         driver.findElement(searchButton).click();
-        Reporter.log("Clicked Search button");
+        Reporter.log("Clicked Search button",true);
     }
 
     public void verify_checkInSpan(){
@@ -120,7 +133,18 @@ public class SearchHotel_Page_Object extends General_Functions{
             String spanMessage = driver.findElement(checkInSpan).getText();
             Reporter.log("Verify Message : "+spanMessage,true);
         } catch (Exception e){
-            Reporter.log("Failed to verify message.");
+            Reporter.log("Failed to verify message.",true);
+        }
+    }
+
+    public void verify_SelectHotel_Page(){
+        wait = new WebDriverWait(driver,20);
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(continueBtuoon));
+            Reporter.log("Successfuly moved to Select Hotel Page",true);
+
+        } catch (Exception e){
+            Reporter.log("Failed to verify the Select Hotel Page",true);
         }
     }
 
