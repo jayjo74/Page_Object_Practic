@@ -13,6 +13,20 @@ import java.util.NoSuchElementException;
  */
 public class General_Functions {
 
+
+
+
+
+
+    public void verify_ObjectText(WebElement element, String expectedText) {
+           String currentTextValue = element.getText();
+           if(currentTextValue.equals(expectedText)){
+               System.out.println("Verified Object Text : "+expectedText);
+           }else {
+               System.out.println("Failed verity the Object Text : expected-"+expectedText+" ,actural-"+currentTextValue);
+           }
+    }
+
     public String get_SelectedOption(WebElement element) {
         Select select = new Select(element);
         WebElement selectedElement = select.getFirstSelectedOption();

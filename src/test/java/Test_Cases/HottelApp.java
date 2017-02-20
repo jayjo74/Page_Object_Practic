@@ -2,6 +2,7 @@ package Test_Cases;
 
 import Page_Object.LogIn_Page_Object;
 import Page_Object.SearchHotel_Page_Object;
+import Page_Object.SelectHotel_Page_Object;
 import org.apache.log4j.PropertyConfigurator;
 import org.joda.time.DateTime;
 import org.openqa.selenium.WebDriver;
@@ -197,6 +198,76 @@ public class HottelApp {
 //        11. Verify that hotel displayed is the same as selected in search Hotel form.
         sh.verify_SelectHotel_Page();
 
-
     }
+
+    @Test
+     public void TC_105(){
+
+         String userName = p.getProperty("userID_value");
+         String passwordName = p.getProperty("password_value");
+         String locationValue = p.getProperty("location_Value");
+         String hotelValue = p.getProperty("hotel_value");
+         String roomTypeValue = p.getProperty("roomType_value");
+         String num_roomValue = p.getProperty("numberRoom_value");
+         String adultPerRoomValue = p.getProperty("adultPerRoom_value");
+         String num_ChildsValue = p.getProperty("numberOfChild_value");
+
+         LogIn_Page_Object li = new LogIn_Page_Object(driver);
+         SearchHotel_Page_Object sh = new SearchHotel_Page_Object(driver);
+         SelectHotel_Page_Object sl = new SelectHotel_Page_Object(driver);
+
+//        2. Login to the application using username and password as in test data.
+         li.setUserID(userName);
+         li.setPassWord(passwordName);
+         li.clickLogInButton();
+
+//        3. Select location as in test data.  Location: Sydney
+         sh.selectLocation(locationValue);
+
+//        4. Select hotel as in test data. Hotel: Hotel Creek
+         sh.selectHotel(hotelValue);
+
+//        5. Select room type as in test data. Room type: standard
+         sh.selectRoomType(roomTypeValue);
+
+//        6. Select no-of-rooms as in test data. No-of-rooms:1
+         sh.selectNumRoom(num_roomValue);
+
+//        7. Enter check-out-date as in test data. Check-in-date: today’s  date Checko-utdate:today+1 date
+         DateTime today = new DateTime();
+         DateTime checkInTime = today.plusDays(1);
+         DateTime checkOutTime = today.plusDays(2);
+         String checkInTimeValue = checkInTime.toString("dd/MM/yyyy");
+         String checkOutTimeValue = checkOutTime.toString("dd/MM/yyyy");
+
+         sh.setCheckInDate(checkInTimeValue);
+         sh.setCheckOutDate(checkOutTimeValue);
+
+//        8. Select No-of-adults as in test data.No-of-adults:1
+         sh.setAdultRoomBox(adultPerRoomValue);
+
+//        9. Select No-of-children as in test data.No-of-children: 0
+         sh.selectNumchild(num_ChildsValue);
+
+//        10. Click on Search button.
+         sh.clickSerarchButton();
+         sh.verify_SelectHotel_Page();
+
+//         11. Verify that check-indate and check-outdates are the same as selected in search hotel form.
+
+        if (checkInTimeValue.equals(sl.get_arriveDateText())){
+            Reporter.log("Verified check in date - "+checkInTimeValue,true);
+        } else {
+            Reporter.log("Check In date is not equle",true );
+        }
+
+         if (checkOutTimeValue.equals(sl.get_departureDateText())){
+             Reporter.log("Verified check out date - "+checkOutTimeValue,true);
+         } else {
+             Reporter.log("Check In date is not equle",true );
+         }
+
+
+
+     }
 }
